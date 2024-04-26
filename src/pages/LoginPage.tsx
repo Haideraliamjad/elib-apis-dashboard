@@ -34,7 +34,7 @@ export default function LoginPage() {
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
                 <Link
-                  to="/reset-password"
+                  to="/auth/reset-password"
                   className="ml-auto inline-block text-sm underline"
                 >
                   Forgot your password?
@@ -48,7 +48,7 @@ export default function LoginPage() {
           </div>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
-            <Link to="/sign-up" className="underline">
+            <Link to="/auth/sign-up" className="underline">
               Sign up
             </Link>
           </div>

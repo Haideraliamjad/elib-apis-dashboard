@@ -34,7 +34,7 @@ export default function ResetPasswordPage() {
           </div>
           <div className="mt-4 text-center text-sm">
             Want Login...?{" "}
-            <Link to="/login" className="underline">
+            <Link to="/auth/login" className="underline">
               Click here
             </Link>
           </div>
