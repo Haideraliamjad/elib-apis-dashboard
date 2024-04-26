@@ -9,7 +9,15 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRef } from "react";
 export default function LoginPage() {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  function login() {
+    console.log(emailRef.current?.value, passwordRef.current?.value);
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Card className="mx-auto max-w-sm">
@@ -28,6 +36,7 @@ export default function LoginPage() {
                 type="email"
                 placeholder="m@example.com"
                 required
+                ref={emailRef}
               />
             </div>
             <div className="grid gap-2">
@@ -40,9 +49,9 @@ export default function LoginPage() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" required />
+              <Input id="password" type="password" ref={passwordRef} required />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" onClick={login} className="w-full">
               Login
             </Button>
           </div>
