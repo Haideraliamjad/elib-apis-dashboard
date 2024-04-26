@@ -12,6 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRef } from "react";
 import { login } from "@/http/api";
+import { LoaderCircle } from "lucide-react";
+
 export default function LoginPage() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -66,14 +68,18 @@ export default function LoginPage() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" ref={passwordRef} required />
+              <Input id="password" type="password" ref={passwordRef} />
             </div>
             <Button
               type="submit"
               onClick={HandleSunbmitlogin}
               className="w-full"
             >
-              Login
+              {mutation.isPending ? (
+                <LoaderCircle className="animate-spin ease-linear" />
+              ) : (
+                "login"
+              )}
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
