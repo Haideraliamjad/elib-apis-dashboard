@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRef } from "react";
 import { login } from "@/http/api";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function LoginPage() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -32,7 +33,7 @@ export default function LoginPage() {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
     if (!email || !password) {
-      return alert("please enter email and password");
+      return alert("error");
     }
     mutation.mutate({ email, password });
   }
@@ -41,9 +42,20 @@ export default function LoginPage() {
     <div className="flex justify-center items-center min-h-screen">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle>Login</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
+            {mutation.isError ? (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                  Email or password is invalid
+                </AlertDescription>
+              </Alert>
+            ) : (
+              ""
+            )}
           </CardDescription>
         </CardHeader>
         <CardContent>
