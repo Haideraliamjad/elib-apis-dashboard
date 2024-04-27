@@ -17,3 +17,7 @@ export const signup = async (data: {
 }) => {
   return api.post("/api/users/register", data);
 };
+
+export const getBooks = async () => {
+  return api.get("/api/books");
+};
