@@ -14,16 +14,20 @@ import { useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { signup } from "@/http/api";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, LoaderCircle } from "lucide-react";
+import useTokenStore from "@/store";
+
 export default function SignupPage() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
+  const token = useTokenStore((state) => state.setToken);
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: signup,
-    onSuccess: () => {
-      navigate("/auth/login");
+    onSuccess: (response) => {
+      token(response.data?.token);
+      navigate("/dashboard/home");
     },
   });
 
@@ -77,7 +81,11 @@ export default function SignupPage() {
             </div>
 
             <Button onClick={HandleSunbmitregister}>
-              <span className="ml-2">Create an account</span>
+              {mutation.isPending ? (
+                <LoaderCircle className="animate-spin ease-linear" />
+              ) : (
+                <span className="ml-2">Create an account</span>
+              )}
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">

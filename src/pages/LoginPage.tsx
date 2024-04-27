@@ -14,14 +14,17 @@ import { useRef } from "react";
 import { login } from "@/http/api";
 import { LoaderCircle, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import useTokenStore from "@/store";
 
 export default function LoginPage() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const token = useTokenStore((state) => state.setToken);
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: login,
-    onSuccess: () => {
+    onSuccess: (response) => {
+      token(response.data?.token);
       navigate("/dashboard/home");
     },
     onError: () => {
