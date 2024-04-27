@@ -21,3 +21,9 @@ export const signup = async (data: {
 export const getBooks = async () => {
   return api.get("/api/books");
 };
+export const createBook = async (data: FormData) =>
+  api.post("/api/books/create", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });

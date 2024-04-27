@@ -40,22 +40,28 @@ export default function BooksPage() {
   const { data } = useQuery({
     queryKey: ["books"],
     queryFn: getBooks,
+    staleTime: 1000,
   });
   return (
     <div>
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link to={"/dashboard/home"}>Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink>Books</BreadcrumbLink>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
+      <div className="flex align-center justify-between">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild>
+                <Link to={"/dashboard/home"}>Home</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink>Books</BreadcrumbLink>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <Link to="/dashboard/create-book">
+          <Button>Add Book</Button>
+        </Link>
+      </div>
       <Card className="mt-6">
         <CardHeader>
           <CardTitle>Books</CardTitle>
